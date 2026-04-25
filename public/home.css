@@ -95,6 +95,14 @@ nav {
   gap: 4px;
 }
 
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-btn {
+  display: none;
+}
+
 .nav-links a {
   color: var(--text2);
   text-decoration: none;
@@ -1245,11 +1253,133 @@ li:hover {
 @media (max-width: 768px) {
   nav {
     padding: 0 16px;
-    height: 60px;
+    min-height: 60px;
+    height: auto;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 10px;
   }
 
   .nav-brand {
     font-size: 18px;
+  }
+
+  .nav-auth {
+    display: none;
+    width: 100%;
+    order: 5;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 2px 0 6px;
+  }
+
+  .nav-auth .nav-link-plain,
+  .nav-auth .btn,
+  .nav-auth form,
+  .nav-auth form button {
+    width: 100%;
+  }
+
+  .nav-auth .nav-link-plain,
+  .nav-auth .btn {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .nav-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    order: 2;
+    margin-left: auto;
+    position: relative;
+    transition: var(--transition);
+  }
+
+  .nav-toggle-btn:hover {
+    border-color: var(--brand);
+    background: var(--surface2);
+  }
+
+  .nav-toggle-btn span,
+  .nav-toggle-btn span::before,
+  .nav-toggle-btn span::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: var(--transition);
+    position: relative;
+  }
+
+  .nav-toggle-btn span::before,
+  .nav-toggle-btn span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .nav-toggle-btn span::before {
+    top: -6px;
+  }
+
+  .nav-toggle-btn span::after {
+    top: 6px;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    order: 4;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 6px 0 2px;
+    border-top: 1px solid var(--border);
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    background: var(--surface2);
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .nav-toggle:checked~.nav-links {
+    display: flex;
+  }
+
+  .nav-toggle:checked~.nav-auth {
+    display: flex;
+  }
+
+  .nav-toggle:checked+.nav-toggle-btn span {
+    background: transparent;
+  }
+
+  .nav-toggle:checked+.nav-toggle-btn span::before {
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  .nav-toggle:checked+.nav-toggle-btn span::after {
+    transform: rotate(-45deg);
+    top: 0;
   }
 
   .nav-links a {
@@ -1325,10 +1455,6 @@ li:hover {
 }
 
 @media (max-width: 480px) {
-  .nav-links {
-    display: none;
-  }
-
   .card-actions {
     flex-direction: column;
   }

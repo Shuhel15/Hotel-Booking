@@ -3,6 +3,11 @@
     <span class="brand-name">NestVio</span>
   </a>
 
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation menu">
+  <label for="nav-toggle" class="nav-toggle-btn" aria-label="Open navigation menu">
+    <span></span>
+  </label>
+
   <div class="nav-links">
     <% if (isLoggedIn) { %>
       <% if (user && user.userType==='guest' ) { %>
