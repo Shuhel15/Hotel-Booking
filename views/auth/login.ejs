@@ -1,0 +1,22 @@
+<%- include('../partials/head.ejs')%>
+  </head>
+
+  <body class="login-page">
+    <%- include('../partials/nav.ejs')%>
+      <main>
+        <%- include('../partials/errors.ejs')%>
+          <section class="login-shell">
+            <h1 class="login-title">Welcome back</h1>
+            <p class="login-subtitle">Log in to manage bookings, favorites, and your hosting dashboard.</p>
+            <form action="/login" method="POST" class="login">
+              <input type="email" name="email" placeholder="example@gmail.com" required
+                value="<%= oldInput.email ? oldInput.email : ''%>" />
+              <input type="password" name="password" placeholder="Enter your password" required />
+              <input type="submit" value="Login" class="btn">
+            </form>
+            <p class="login-help">New here? <a href="/signup">Create an account</a></p>
+          </section>
+      </main>
+  </body>
+
+  </html>

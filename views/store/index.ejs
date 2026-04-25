@@ -1,0 +1,65 @@
+<%- include('../partials/head.ejs')%>
+  </head>
+
+  <body>
+    <%- include('../partials/nav.ejs')%>
+      <main>
+        <section class="hero-section">
+          <div class="hero-content">
+            <h1 class="hero-title">Find your perfect stay</h1>
+            <p class="hero-subtitle">Discover handpicked homes, apartments, and unique spaces — book with confidence on
+              NestVio.</p>
+            <a href="/homes" class="btn btn-hero">Explore All Homes →</a>
+          </div>
+        </section>
+
+        <h2 class="page-title">Featured Homes</h2>
+        <div class="homes-list">
+          <% if(registeredHomes && registeredHomes.length> 0) { %>
+            <% registeredHomes.forEach(home=> { %>
+              <article class="home-card">
+                <div class="card-image-wrapper">
+                  <img src="<%= home.photo %>" alt="<%= home.homeName %>" loading="lazy">
+                  <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                  <div class="card-header">
+                    <h3>
+                      <%= home.homeName %>
+                    </h3>
+                    <span class="price">₹<%= home.price %><small>/night</small></span>
+                  </div>
+                  <div class="card-info">
+                    <p class="location"><span aria-hidden="true">📍</span>
+                      <%= home.location %>
+                    </p>
+                    <p class="rating"><span aria-hidden="true">⭐</span>
+                      <%= home.rating %> Rating
+                    </p>
+                  </div>
+                  <div class="card-actions">
+                    <a href="/homes/<%= home._id %>" class="btn btn-details">View Details</a>
+                    <% if (isLoggedIn) { %>
+                      <form action="/bookings" method="POST" style="flex: 1; display: flex;">
+                        <input type="hidden" name="id" value="<%= home._id %>">
+                        <button type="submit" class="btn btn-book" style="width: 100%;">Book Now</button>
+                      </form>
+                      <% } else { %>
+                        <a href="/login" class="btn btn-book">Login to Book</a>
+                        <% } %>
+                  </div>
+                </div>
+              </article>
+              <% }) %>
+                <% } else { %>
+                  <div class="empty-state">
+                    <p>No homes available at the moment. Check back soon!</p>
+                  </div>
+                  <% } %>
+        </div>
+
+        <%- include('../partials/footer.ejs') %>
+      </main>
+  </body>
+
+  </html>

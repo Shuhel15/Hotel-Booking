@@ -1,0 +1,74 @@
+<%- include('../partials/head.ejs')%>
+  </head>
+
+  <body>
+    <%- include('../partials/nav.ejs')%>
+      <main>
+        <section class="home-detail-wrapper">
+          <h1>Details of <%= home.homeName %>
+          </h1>
+          <div class="home-card home-detail-card">
+            <img src="<%= home.photo %>" alt="<%= home.homeName %>">
+            <div class="detail-header">
+              <h2>
+                <%= home.homeName %>
+              </h2>
+              <div class="detail-header-right">
+                <span class="detail-price">₹<%= home.price %>/night</span>
+                <% if (isLoggedIn) { %>
+                  <%- include('../partials/favourite.ejs', { home: home }) %>
+                    <% } else { %>
+                      <a href="/login" class="btn-fav-inline">♡ Favourites</a>
+                      <% } %>
+              </div>
+            </div>
+            <div class="detail-description-section">
+              <div class="desc-label">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>
+                About this home
+              </div>
+              <p class="desc-text">
+                <%= home.description
+                  || "A comfortable stay with great amenities and easy access to nearby attractions. Perfect for both short getaways and extended stays."
+                  %>
+              </p>
+            </div>
+            <div class="detail-meta-grid">
+              <div class="meta-item">
+                <span class="meta-label">Location</span>
+                <span class="meta-value">
+                  <%= home.location %>
+                </span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Price Per Night</span>
+                <span class="meta-value">₹<%= home.price %></span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Rating</span>
+                <span class="meta-value">
+                  <%= home.rating %> ⭐
+                </span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <a href="/homes" class="btn btn-back">← Back to Homes</a>
+              <% if (isLoggedIn) { %>
+                <form action="/bookings" method="POST" style="flex: 1; display: flex;">
+                  <input type="hidden" name="id" value="<%= home._id %>">
+                  <button type="submit" class="btn" style="width: 100%;">Book Now</button>
+                </form>
+                <% } else { %>
+                  <a href="/login" class="btn">Login to Book</a>
+                  <% } %>
+            </div>
+          </div>
+        </section>
+        <%- include('../partials/footer.ejs') %>
+      </main>
+  </body>
+
+  </html>

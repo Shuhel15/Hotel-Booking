@@ -1,0 +1,43 @@
+<%- include('../partials/head.ejs')%>
+</head>
+<body>
+  <%- include('../partials/nav.ejs')%>
+  <main>
+    <h1 class="page-title">Browse Homes</h1>
+    <div class="homes-list">
+      <% if(registeredHomes && registeredHomes.length > 0) { %>
+        <% registeredHomes.forEach(home => { %>
+          <div class="home-card">
+            <div class="card-image-wrapper">
+              <img src="<%= home.photo %>" alt="<%= home.homeName %>">
+              <div class="card-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-header">
+                <h3><%= home.homeName %></h3>
+                <span class="price">₹<%= home.price %></span>
+              </div>
+              <div class="card-info">
+                <p class="location"><strong>📍</strong> <%= home.location %></p>
+                <p class="rating"><strong>⭐</strong> <%= home.rating %> Rating</p>
+              </div>
+              <div class="card-actions">
+                <a href="/homes/<%= home._id %>" class="btn btn-view-details">
+                  <span>View Details</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <%- include('../partials/favourite.ejs', {home:home})%>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="empty-state">
+          <p>No homes available at the moment.</p>
+        </div>
+      <% } %>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+  </main>
+</body>
+</html>

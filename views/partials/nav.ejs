@@ -1,0 +1,29 @@
+<nav>
+  <a href="/" class="nav-brand" aria-label="NestVio Home">
+    <span class="brand-name">NestVio</span>
+  </a>
+
+  <div class="nav-links">
+    <% if (isLoggedIn) { %>
+      <% if (user && user.userType==='guest' ) { %>
+        <a href="/homes">Homes</a>
+        <a href="/favourites">Favourites</a>
+        <a href="/bookings">Bookings</a>
+        <% } else { %>
+          <a href="/host/host-home-list">My Homes</a>
+          <a href="/host/add-home">+ Add Home</a>
+          <% } %>
+            <% } %>
+  </div>
+
+  <div class="nav-auth">
+    <% if (!isLoggedIn) { %>
+      <a href="/signup" class="nav-link-plain">Sign Up</a>
+      <a href="/login" class="btn btn-nav-login">Log In</a>
+      <% } else { %>
+        <form action="/logout" method="POST">
+          <button type="submit" class="btn btn-logout">Log Out</button>
+        </form>
+        <% } %>
+  </div>
+</nav>

@@ -1,0 +1,52 @@
+<%- include('../partials/head.ejs')%>
+  </head>
+
+  <body>
+    <%- include('../partials/nav.ejs')%>
+      <main>
+        <h1 class="page-title">📅 Your Bookings</h1>
+        <div class="homes-list">
+          <% if(bookedHomes && bookedHomes.length> 0) { %>
+            <% bookedHomes.forEach(home=> { %>
+              <div class="home-card">
+                <div class="card-image-wrapper">
+                  <img src="<%= home.photo %>" alt="<%= home.homeName %>">
+                  <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                  <div class="card-header">
+                    <h3>
+                      <%= home.homeName %>
+                    </h3>
+                    <span class="price">₹<%= home.price %></span>
+                  </div>
+                  <div class="card-info">
+                    <p class="location"><strong>📍</strong>
+                      <%= home.location %>
+                    </p>
+                    <p class="rating"><strong>⭐</strong>
+                      <%= home.rating %> Rating
+                    </p>
+                  </div>
+                  <div class="card-actions">
+                    <a href="/homes/<%=home._id%>" class="btn btn-details">View Details</a>
+                    <form action="/bookings/delete/<%= home._id %>" method="POST">
+                      <button type="submit" class="btn btn-delete">Cancel Booking</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+                <% } else { %>
+                  <div class="empty-state">
+                    <h2>No bookings yet</h2>
+                    <p>You haven't booked any homes. Explore amazing stays!</p>
+                    <a href="/homes" class="add-home-btn">Browse Homes</a>
+                  </div>
+                  <% } %>
+        </div>
+        <%- include('../partials/footer.ejs') %>
+      </main>
+  </body>
+
+  </html>

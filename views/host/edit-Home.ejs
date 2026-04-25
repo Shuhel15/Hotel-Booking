@@ -1,0 +1,30 @@
+<%- include('../partials/head.ejs')%>
+  </head>
+
+  <body>
+    <%- include('../partials/nav.ejs')%>
+      <main>
+        <h1 class="page-title">
+          <%= editing ? "Edit" : "List" %> Your Home on NestVio
+        </h1>
+        <form action="/host/<%= editing ? 'edit-home' : 'add-home' %>" method="POST" enctype="multipart/form-data"
+          class="add-home">
+          <input type="hidden" name="id" value="<%= editing? home._id: ''%>" />
+          <input type="text" value="<%= editing ? home.homeName: ''%>" placeholder="Home Name" name="homeName"
+            required />
+          <input type="number" value="<%= editing ? home.price: ''%>" placeholder="₹ Price Per Night" name="price"
+            required />
+          <input type="text" value="<%= editing ? home.location: ''%>" placeholder="Location" name="location"
+            required />
+          <input type="number" value="<%= editing ? home.rating: ''%>" placeholder="Rating (1-5)" name="rating"
+            step="0.1" min="0" max="5" required />
+          <input type="file" name="photo" multiple accept="image/jpg, image/jpeg, image/png" />
+          <textarea name="description" placeholder="Description"
+            required><%= editing ? home.description: ''%></textarea>
+
+          <input type="submit" value="<%= editing ? 'Update home' : 'Add Home' %>">
+        </form>
+      </main>
+  </body>
+
+  </html>

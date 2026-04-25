@@ -1,0 +1,51 @@
+<%- include('../partials/head.ejs')%>
+  </head>
+
+  <body class="signup-page">
+    <%- include('../partials/nav.ejs')%>
+      <main>
+        <%- include('../partials/errors.ejs')%>
+          <section class="signup-shell">
+            <h1 class="signup-title">Create your account</h1>
+            <p class="signup-subtitle">Join as a guest or become a host and list your places.</p>
+            <form action="/signup" method="POST" class="signup">
+              <div class="signup-grid">
+                <input type="text" name="firstName" placeholder="First Name"
+                  value="<%= oldInput.firstName ? oldInput.firstName : ''%>" required />
+
+                <input type="text" name="lastName" value="<%= oldInput.lastName ? oldInput.lastName : ''%>"
+                  placeholder="Last Name" />
+
+              </div>
+              <input type="email" name="email" value="<%= oldInput.email ? oldInput.email : ''%>"
+                placeholder="abc@gmail.com" required />
+
+              <input type="password" name="password" placeholder="Password" required />
+
+              <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+              <fieldset class="role-group">
+                <legend>User Type</legend>
+                <div class="role-options">
+                  <label class="role-option" for="guest">
+                    <input type="radio" name="userType" value="guest" id="guest" required
+                      <%= (typeof oldInput !== 'undefined' && oldInput.userType === 'guest') ? 'checked' : '' %> />
+                    <span>Guest</span>
+                  </label>
+                  <label class="role-option" for="host">
+                    <input type="radio" name="userType" value="host" id="host"
+                      <%= (typeof oldInput !== 'undefined' && oldInput.userType === 'host') ? 'checked' : '' %> />
+                    <span>Host</span>
+                  </label>
+                </div>
+              </fieldset>
+              <label class="terms-row" for="terms">
+                <input type="checkbox" name="terms" id="terms" class="terms" required>
+                <span>I agree to the terms and conditions</span>
+              </label>
+              <input type="submit" value="Register" class="btn" />
+            </form>
+          </section>
+      </main>
+  </body>
+
+  </html>

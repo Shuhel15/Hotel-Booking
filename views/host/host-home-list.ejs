@@ -1,0 +1,55 @@
+<%- include('../partials/head.ejs')%>
+  </head>
+
+  <body>
+    <%- include('../partials/nav.ejs')%>
+      <main>
+        <div class="host-header">
+          <h1>Your Homes</h1>
+          <a href="/host/add-home" class="add-home-btn">+ Add New Home</a>
+        </div>
+        <div class="homes-list">
+          <% if(registeredHomes && registeredHomes.length> 0) { %>
+            <% registeredHomes.forEach(home=> { %>
+              <div class="home-card">
+                <div class="card-image-wrapper">
+                  <img src="<%= home.photo %>" alt="<%= home.homeName %>">
+                  <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                  <div class="card-header">
+                    <h3>
+                      <%= home.homeName %>
+                    </h3>
+                    <span class="price">₹<%= home.price %></span>
+                  </div>
+                  <div class="card-info">
+                    <p class="location"><strong>📍</strong>
+                      <%= home.location %>
+                    </p>
+                    <p class="rating"><strong>⭐</strong>
+                      <%= home.rating %> Rating
+                    </p>
+                  </div>
+                  <div class="card-actions">
+                    <a href="/host/edit-home/<%= home._id %>?editing=true" class="btn btn-edit">✎ Edit</a>
+                    <form action="/host/delete-home/<%= home._id %>" method="POST"
+                      onsubmit="return confirm('Are you sure?');">
+                      <button type="submit" class="btn btn-delete">🗑 Delete</button>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+              <% }) %>
+                <% } else { %>
+                  <div class="empty-state">
+                    <p>No homes yet. Start by adding your first home!</p>
+                    <a href="/host/add-home" class="add-home-btn">+ Add Home</a>
+                  </div>
+                  <% } %>
+        </div>
+      </main>
+  </body>
+
+  </html>
