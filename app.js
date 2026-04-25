@@ -11,7 +11,6 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import ConnectMongoDBSession from 'connect-mongodb-session';
 const MongoDBStore = ConnectMongoDBSession(session);
-// const DB_PATH = 'mongodb+srv://Shuhel:root%40123@airbnb.6jjiwzx.mongodb.net/airbnb?retryWrites=true&w=majority'
 dotenv.config();
 dns.setServers(['8.8.8.8', '1.1.1.1']);
 
@@ -101,9 +100,10 @@ app.use(errorController.addError);
 
 mongoose.connect(process.env.MONGO_URI).then(()=>{
   console.log("Connected to Mongoose");
-  
+
+  const PORT = process.env.PORT || 3000;
 app.listen(process.env.PORT, () => {
-    console.log(`server is running on http://localhost:${process.env.PORT}`);
+    console.log(`server is running on http://localhost:${PORT}`);
   });
 }).catch( err =>{
 console.log("Error While connection to Mongoose:", err.message);
