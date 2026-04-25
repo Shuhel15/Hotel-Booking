@@ -5,6 +5,7 @@ const storeRouter = express.Router();
 
 // Home / Landing page
 storeRouter.get('/', storeController.getIndex);
+storeRouter.get('/index', storeController.getIndex);
 
 // Browse all homes (guest view)
 storeRouter.get('/homes', storeController.gethomes);
