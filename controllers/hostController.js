@@ -13,7 +13,7 @@ export const getAddHome = (req, res, next) => {
 // Ye getHostHomes function database se saare homes laakar
 //  Host Home List page pe show karta hai.
 export const getHostHomes = (req, res, next) => {
-  Home.find()
+  Home.find({ host: req.session.user._id })
     .then((registeredHomes) => {
       res.render('host/host-home-list', {
         registeredHomes,
@@ -50,7 +50,8 @@ export const postAddHome = (req, res, next) => {
     location,
     rating,
     photo,
-    description
+    description,
+    host: req.session.user._id
   });
 
   newHome.save()
@@ -71,7 +72,7 @@ export const getEditHome = (req, res, next) => {
   const editing = req.query.editing === 'true';
   const homeId = req.params.homeId;
 
-  Home.findById(homeId)
+  Home.findOne({ _id: homeId, host: req.session.user._id })
     .then((home) => {
       if (!home) {
         console.log('Home not found for editing');
@@ -96,7 +97,7 @@ export const getEditHome = (req, res, next) => {
 export const postEditHome = async (req, res, next) => {
   try {
     const { id, homeName, price, location, rating, description } = req.body;
-    const home = await Home.findById(id);
+    const home = await Home.findOne({ _id: id, host: req.session.user._id });
     if (!home) {
       return res.redirect('/host/host-home-list');
     }
@@ -131,7 +132,7 @@ export const postEditHome = async (req, res, next) => {
 export const postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId
   console.log("Came to delete", homeId)
-  Home.findByIdAndDelete(homeId)
+  Home.findOneAndDelete({ _id: homeId, host: req.session.user._id })
     .then(() => {
       res.redirect('/host/host-home-list');
     })

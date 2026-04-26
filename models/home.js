@@ -7,6 +7,11 @@ import mongoose from 'mongoose';
   rating: { type: Number, required: true },
   photo: String,
   description: String,
+  host: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 })
 
 // homeSchema.pre('findOneAndDelete', async function(next) {
