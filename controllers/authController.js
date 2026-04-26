@@ -3,7 +3,6 @@ import User from "../models/user.js";
 import bcrypt from 'bcryptjs';
 import user from "../models/user.js";
 
-//signup karne ke liye 
 export const getSignup = (req, res, next) => {
   res.render('auth/signup',
     {
@@ -13,9 +12,6 @@ export const getSignup = (req, res, next) => {
       oldInput: { firstName: '', lastName: '', email: '', userType: '' },
       user: {}
     });
-
-
-
 };
 
 export const postSignup = [
@@ -85,7 +81,7 @@ export const postSignup = [
       })
     }
 
-    //password ko encrypt karne ke liye bcrypt ka use karte hai.
+    //for password encryption
     bcrypt.hash(password, 12).then(hashedPassword => {
       const user = new User({ firstName, lastName, email, password: hashedPassword, userType })
       return user.save()
@@ -103,7 +99,7 @@ export const postSignup = [
   }
 ]
 
-//login karne ke liye 
+//login
 export const getLogin = (req, res, next) => {
   res.render('auth/login', {
     pageTitle: 'Login',

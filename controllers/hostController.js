@@ -10,8 +10,6 @@ export const getAddHome = (req, res, next) => {
   });
 };
 
-// Ye getHostHomes function database se saare homes laakar
-//  Host Home List page pe show karta hai.
 export const getHostHomes = (req, res, next) => {
   Home.find({ host: req.session.user._id })
     .then((registeredHomes) => {
@@ -31,8 +29,6 @@ export const getHostHomes = (req, res, next) => {
     });
 };
 
-//Ye postAddHome function naya home database me save karta
-// hai jab user Add Home form submit karta hai.
 export const postAddHome = (req, res, next) => {
   const { homeName, price, location, rating, description } = req.body;
   console.log(homeName, price, location, rating, description);
@@ -64,10 +60,7 @@ export const postAddHome = (req, res, next) => {
     });
 };
 
-// Ye getEditHome function Edit Home page open karne ke liye
-// data fetch kar raha hai Jab user kisi home ko edit karna
-// chahta hai, tab ye function database se us home ka data 
-// nikal ke form me fill karke page render karta hai.
+
 export const getEditHome = (req, res, next) => {
   const editing = req.query.editing === 'true';
   const homeId = req.params.homeId;
@@ -93,7 +86,7 @@ export const getEditHome = (req, res, next) => {
       res.redirect('/host/host-home-list');
     });
 };
-// home ki details edit karne ke liye
+
 export const postEditHome = async (req, res, next) => {
   try {
     const { id, homeName, price, location, rating, description } = req.body;
@@ -127,8 +120,6 @@ export const postEditHome = async (req, res, next) => {
     res.redirect('/host/host-home-list');
   }
 };
-
-//home delete karne ke liye 
 export const postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId
   console.log("Came to delete", homeId)

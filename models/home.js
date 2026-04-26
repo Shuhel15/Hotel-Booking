@@ -14,11 +14,6 @@ import mongoose from 'mongoose';
   },
 })
 
-// homeSchema.pre('findOneAndDelete', async function(next) {
-//   const homeId = this.getQuery()['_id'];
-//   await favourite.deleteMany({homeId: homeId })
-// })
-
 export default mongoose.model('Home', homeSchema)
 
 

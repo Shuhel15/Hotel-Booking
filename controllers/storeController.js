@@ -63,15 +63,6 @@ export const getHomeDetails = (req, res, next) => {
     });
 };
 
-// export const getBookings = (req, res, next) => {
-//   res.render('store/bookings', {
-//     pageTitle: 'My Bookings',
-//     isLoggedIn: req.session.isLoggedIn || false,
-//     user: req.session.user
-//   });
-// };
-
-
 //*********************BOOKINGS****************************
 
 export const getBookings = async (req, res, next) => {

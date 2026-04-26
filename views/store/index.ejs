@@ -16,7 +16,7 @@
         <h2 class="page-title">Featured Homes</h2>
         <div class="homes-list">
           <% if(registeredHomes && registeredHomes.length> 0) { %>
-            <% registeredHomes.forEach(home=> { %>
+            <% registeredHomes.slice(0,4).forEach(home=> { %>
               <article class="home-card">
                 <div class="card-image-wrapper">
                   <img src="<%= home.photo %>" alt="<%= home.homeName %>" loading="lazy">
