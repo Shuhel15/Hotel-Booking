@@ -4,7 +4,7 @@ import * as storeController from '../controllers/storeController.js';
 const storeRouter = express.Router();
 
 // Home / Landing page
-storeRouter.get('/index', storeController.getIndex);
+storeRouter.get('/', storeController.getIndex);
 
 // Browse all homes (guest view)
 storeRouter.get('/homes', storeController.gethomes);
